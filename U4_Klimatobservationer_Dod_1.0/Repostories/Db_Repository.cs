@@ -211,15 +211,6 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
             }
             catch (PostgresException ex)
             {
-                if (ex.SqlState == "23503")
-                {
-                    if (ex.ConstraintName == "person_sex_id_fkey")
-                    {
-                        throw new Exception("fel kön", ex);
-                    }
-                    throw new Exception("Du försöker ge en rank till en pirat som inte existerar", ex);
-
-                }
                 throw new Exception("Allvarligt fel, får inte kontakt med databasen", ex);
             }
 
@@ -227,6 +218,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public double? SelectGeolocation()
         {
+            // Slumpar geolocation. Tas någon av dessa bort i postgres kraschar hela systemet.
             Random random = new Random();
             random.Next(101);
       
@@ -247,6 +239,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public List<Measurement> GetObservationReportedMeasurements(int? id_input)
         {
+            // Hämtar alla measurements från en observation
             try
             {
                 var Measurements = new List<Measurement>();
@@ -283,6 +276,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public List<Observation> GetObserverReportedObservation(int? id_input)
         {
+            // Hämtar alla observationer som en observatör rapporterat
             try
             {
                 var Observations = new List<Observation>();
@@ -318,6 +312,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public void RegisterObservation(int? Observer_ID_input,double? Geolocation_ID_input)
         {
+
             try
             {
                 using var conn = new NpgsqlConnection(_connectionString);
@@ -349,6 +344,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public int? CatchCreatedObservationID()
         {
+            // Fångar det sista Observation.ID och retunerar det. 
             int? CatchCreatedID = 0;
             Observation? observation = null;
             List<Observation> observations = new List<Observation>();
@@ -406,6 +402,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public List<Measurement> GetMeasurementObservation_id()
         {
+            // Hämtar Observation_id i measurement
             int? CatchCreatedID = 0;
             Measurement? measurement = null;
             List<Measurement> measurements = new List<Measurement>();
@@ -438,6 +435,7 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
 
         public List<Observer> GetObservers()
         {
+            
             try
             {
                 var Observers = new List<Observer>();
@@ -464,7 +462,6 @@ namespace U4_Klimatobservationer_Dod_1._0.Repostories
             }
             catch (PostgresException ex)
             {
-
                 throw new Exception("Någonting i databasen stämmer inte överens med koden i programmet. Specifikt i metoden GetObservers()", ex);
             }
         }

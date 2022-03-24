@@ -28,8 +28,11 @@ namespace U4_Klimatobservationer_Dod_1._0.Models
         public int? Category_ID = 0;
 
 
+
+        
         public void SetSelectedObserverValues(string SetFirstName, string SetLastName, int? SetId)
         {
+            //Metod som sätter alla nya värden vid dubbelklick
           SelectedFirstName = SetFirstName;
           SelectedLastName = SetLastName;
           SelectedFullName += SetFirstName;
@@ -38,14 +41,13 @@ namespace U4_Klimatobservationer_Dod_1._0.Models
           SelectedID = SetId;
         }
 
-        public void SetSelectedObserverValues(string SetFirstName, string SetLastName, int? SetId)
+        public void SetSelectedObserverValues(int? SetId, DateTime? SetDate, int? Observer_ID, int? Geolocation_ID)
         {
-           SelectedObservationID = 0;
-           SelectedObservationDate;
-           SelectedObserver_ID = 0;
-           SelectedGeolocation_ID = 0;
-
-
+            //Metod som sätter alla nya värden vid dubbelklick
+            SelectedObservationID = SetId;
+           SelectedObservationDate = SetDate;
+           SelectedObserver_ID = Observer_ID;
+           SelectedGeolocation_ID = Geolocation_ID;
         }
 
 

@@ -24,7 +24,7 @@ namespace U4_Klimatobservationer_Dod_1._0
     {
         Db_Repository db = new Db_Repository();
         Polymorph_Tools po = new Polymorph_Tools();
-    
+      // Deklarar dessa ^ här för att slippa deklarera vid varje interaktion. Nu kan man ropa på tex Polymorph_Tools överallt i gränssnittet utan att behöva deklarera igen.
 
 
         public MainWindow()
@@ -37,6 +37,7 @@ namespace U4_Klimatobservationer_Dod_1._0
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             //lägg till observatör
+            // Använder metoden db.AddObserver() för att lägga till observatör. Metoden returnerar även en bool, detta för att intyga om det gått bra eller dåligt.
             string Firstname_parameter = Firstname_input.Text;
             string Lastname_parameter = Lastname_input.Text;
             if (db.AddObserver(Firstname_parameter, Lastname_parameter) == true)
@@ -57,6 +58,9 @@ namespace U4_Klimatobservationer_Dod_1._0
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            // Hämtar alla observatörer från min databas och presenterar dem i listbox, utan ID. ID hämtas men presenteras inte.
+            // db.CheckIfObserverDBEmpty() använder för att kontrollera om antalet observatörer är noll, detta för att ge feedback om det gått dåligt.
+
             ListBox_Observer.ItemsSource = null;
             try
             {
@@ -75,17 +79,17 @@ namespace U4_Klimatobservationer_Dod_1._0
           
         public void ListBox_Observer_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            // po.SetSelectedObserverValues() sätter nya värden vid dubbelklick på våra sk "polymorph" Observer-strängar som används som parametrar i olika metoder, meddelanden och listboxar.
             var ob = new Observer();
-            Observer observer = ListBox_Observer.SelectedItem as Observer;
+            Observer observer = ListBox_Observer.SelectedItem as Observer; 
             db.observers.Add(observer);
-            po.SetSelectedObserverValues(observer.firstname, observer.lastname, observer.id);
-            lblObserver_Name.Content = null;
-            lblObserver_Name.Content = po.SelectedFullName;
+            po.SetSelectedObserverValues(observer.firstname, observer.lastname, observer.id); lblObserver_Name.Content = " ";
             MessageBox.Show($"Du har nu valt {po.SelectedFirstName} {po.SelectedLastName} med id {po.SelectedID}");
         }
 
         public void LstMeasurment_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            // Här används ingen "Polymorph-metod" för att ändra värdet på klickad measurement utan här ändras polymorph int po.SelectedMeasurementID direkt i gränssnittet.
             var ob = new Observation();
             Measurement measurement = LstMeasurment.SelectedItem as Measurement;
             po.SelectedMeasurementID = measurement.id;
@@ -94,14 +98,13 @@ namespace U4_Klimatobservationer_Dod_1._0
         }
         public void lstObservations_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            // Här sätter "polymorph" metoden pb.SetSelectedObserverValues nya värden på "Polymorph properties" vid dubbelklick. Dessa används sedan som parametrar och meddelanden.
+
             var ob = new Observation();
             var db = new Db_Repository();
             Observation observation = lstObservations.SelectedItem as Observation;
             db.observations.Add(observation);
-            po.SelectedObservationID = observation.id;
-            po.SelectedObservationDate = observation.date;
-            po.SelectedObserver_ID = observation.observer_id;
-            po.SelectedGeolocation_ID = observation.geolocation_id;
+            po.SetSelectedObserverValues(observation.id, observation.date, observation.observer_id, observation.geolocation_id);
             db.GetMeasurementObservation_id();
             foreach (var item in db.GetMeasurementObservation_id())
             {
@@ -130,8 +133,8 @@ namespace U4_Klimatobservationer_Dod_1._0
             // Ta bort en befintlig observatör. Om denne har genomfört observationer 
             // ska man få ett relevant felmeddelande
 
-        
-
+        // Nästa projekt så skulle man kunna utreda om datatypen UINT skulle kunna användas istället för INT för ID nummer, detta för att ett ID nummer aldrig är negativt. 
+        // Därmed är det bättre att kunna lagra fler positiva siffror. UINT gör så att man inte kan lagra negativa siffror men istället kan lagra dubbelt så höga siffervärden.
             if (db.BlockLetters(Txt_Observer_ID.Text) == false)
             {
                 MessageBox.Show("Du får enbart ange siffror");
@@ -148,9 +151,6 @@ namespace U4_Klimatobservationer_Dod_1._0
             {
                 MessageBox.Show("Stopp! Det finns ingen observatör i databasen som har det ID du angett"); return;
             }
-            
-
-
             try
                 {
                     db.RemoveObserver(ID_parameter);
@@ -171,6 +171,13 @@ namespace U4_Klimatobservationer_Dod_1._0
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
+
+            // db.SelectGeolocation() slumpar en geolocation. OBS om man raderar någon geolocation i databasen som används i programmet kraschar systemet. 
+            // Att felsäkra detta prioriterades bort eftersom det inte var ett krav. Citat U4, konstruera applikation - "En observation ska ha en geografisk plats.  
+            //Denna del av programmet behöver ni inte utveckla, plocka några av de testdata ni lagrat" slutcitat.
+            // Metoden db.CatchCreatedObservationID(); hämtar det sista ID nummret i alla observationer, därmed den senast skapade. Används sedan som parameter.
+
+
             double Value_Parameter = Convert.ToDouble(txtValue.Text);
             double Value2_Parameter = Convert.ToDouble(txtValue_2.Text);
             double? GetGeolocation = db.SelectGeolocation();
@@ -210,6 +217,8 @@ namespace U4_Klimatobservationer_Dod_1._0
 
         private void Button_Click_8(object sender, RoutedEventArgs e)
         {
+            // db.BlockLetters felsäkrar programmet igenom att inte tillåta strängar. Skulle metoden inte köras skulle programmet krascha.
+            // När metoden db.UpdateObservationMeasurement() körs.
 
             if (db.BlockLetters(TxtEditValue.Text) == false)
             {

@@ -24,7 +24,7 @@
         <RadioButton x:Name="radSnowDepthAndTemp" Content="Registrera temperatur och snödjup" HorizontalAlignment="Left" Margin="578,388,0,0" VerticalAlignment="Top" Width="205" Height="23"/>
         <Label Content="Välj observatör via dubbelklick" HorizontalAlignment="Left" Margin="315,310,0,0" VerticalAlignment="Top" Width="179" Height="24"/>
         <Label Content="på någon av de hämtade observatörerna." HorizontalAlignment="Left" Margin="315,329,0,0" VerticalAlignment="Top" Width="234" Height="29"/>
-        <Label x:Name="lblObserver_Name" Content="Välj observatör!" HorizontalAlignment="Left" Margin="589,292,0,0" VerticalAlignment="Top" Width="136"/>
+        <Label x:Name="lblObserver_Name" Content="Välj observatör!" HorizontalAlignment="Left" Margin="589,281,0,0" VerticalAlignment="Top" Width="136"/>
         <TextBox x:Name="txtValue_2" HorizontalAlignment="Left" Margin="589,340,0,0" TextWrapping="Wrap" Text="Ange snödjup" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
         <ListBox x:Name="lstObservations" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,28,387,279" MouseDoubleClick="lstObservations_MouseDoubleClick" SelectionChanged="lstObservations_SelectionChanged"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="0,164,0,0" VerticalAlignment="Top" Width="413" Click="Button_Click_7"/>
