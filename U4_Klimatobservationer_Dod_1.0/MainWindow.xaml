@@ -6,5 +6,32 @@
         xmlns:local="clr-namespace:U4_Klimatobservationer_Dod_1._0"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+    <Grid Margin="-1,-17,1,17">
+        <Button Content="Button" HorizontalAlignment="Left" Margin="16,324,0,0" VerticalAlignment="Top" Height="21" Width="118" Click="Button_Click_1"/>
+        <TextBox x:Name="Lastname_input" HorizontalAlignment="Left" Margin="16,301,0,0" TextWrapping="Wrap" Text="Observer.lastname" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="Firstname_input" HorizontalAlignment="Left" Margin="16,257,0,0" TextWrapping="Wrap" Text="Observer.firstname" VerticalAlignment="Top" Width="120" TextChanged="Firstname_input_TextChanged"/>
+        <Label Content="Skapa en observatör" HorizontalAlignment="Left" Margin="16,202,0,0" VerticalAlignment="Top" Width="118"/>
+        <Label Content="Ange: förnamn" HorizontalAlignment="Left" Margin="14,226,0,0" VerticalAlignment="Top" Width="161"/>
+        <Label Content="Ange: efternamn" HorizontalAlignment="Left" Margin="14,275,0,0" VerticalAlignment="Top" Width="161"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="310,285,0,0" VerticalAlignment="Top" Height="22" Width="108" Click="Button_Click_2"/>
+        <Label Content="Hämta observatörer" HorizontalAlignment="Left" Margin="315,257,0,0" VerticalAlignment="Top" Width="124"/>
+        <ListBox x:Name="ListBox_Observer" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="198,258,490,72" MouseDoubleClick="ListBox_Observer_MouseDoubleClick"/>
+        <Label Content="Radera observatörer" HorizontalAlignment="Left" Margin="139,367,0,0" VerticalAlignment="Top" Width="124"/>
+        <TextBox x:Name="Txt_Observer_ID" HorizontalAlignment="Left" Margin="16,371,0,0" TextWrapping="Wrap" Text="Ange ID på den individ du vill radera" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="141,393,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_4"/>
+        <TextBox x:Name="txtValue" HorizontalAlignment="Left" Margin="589,317,0,0" TextWrapping="Wrap" Text="Ange temperatur" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="589,363,0,0" VerticalAlignment="Top" Width="120" Click="Button_Click_6"/>
+        <RadioButton x:Name="radSnowDepthAndTemp" Content="Registrera temperatur och snödjup" HorizontalAlignment="Left" Margin="578,388,0,0" VerticalAlignment="Top" Width="205" Height="23"/>
+        <Label Content="Välj observatör via dubbelklick" HorizontalAlignment="Left" Margin="315,310,0,0" VerticalAlignment="Top" Width="179" Height="24"/>
+        <Label Content="på någon av de hämtade observatörerna." HorizontalAlignment="Left" Margin="315,329,0,0" VerticalAlignment="Top" Width="234" Height="29"/>
+        <Label x:Name="lblObserver_Name" Content="Välj observatör!" HorizontalAlignment="Left" Margin="589,292,0,0" VerticalAlignment="Top" Width="136"/>
+        <TextBox x:Name="txtValue_2" HorizontalAlignment="Left" Margin="589,340,0,0" TextWrapping="Wrap" Text="Ange snödjup" VerticalAlignment="Top" Width="120" TextChanged="TextBox_TextChanged_1"/>
+        <ListBox x:Name="lstObservations" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,28,387,279" MouseDoubleClick="lstObservations_MouseDoubleClick" SelectionChanged="lstObservations_SelectionChanged"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="0,164,0,0" VerticalAlignment="Top" Width="413" Click="Button_Click_7"/>
+        <TextBox x:Name="TxtEditValue" HorizontalAlignment="Left" Margin="418,162,0,0" TextWrapping="Wrap" Text="Dubbel klicka på en observation för att kunna redigera mätpunkt!!" VerticalAlignment="Top" Width="321" Height="40"/>
+        <Label Content="Hämta observationer" HorizontalAlignment="Left" Margin="153,189,0,0" VerticalAlignment="Top" Width="341"/>
+        <Label Content="Redigera mätpunkt" HorizontalAlignment="Left" Margin="418,215,0,0" VerticalAlignment="Top" Width="124" RenderTransformOrigin="-0.792,4.2"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="542,217,0,0" VerticalAlignment="Top" Width="210" Click="Button_Click_8" Height="30"/>
+        <ListBox x:Name="LstMeasurment" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="418,28,61,279" MouseDoubleClick="LstMeasurment_MouseDoubleClick"/>
+    </Grid>
 </Window>
